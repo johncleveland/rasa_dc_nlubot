@@ -1,5 +1,4 @@
 version: "2.0"
-
 nlu:
 - intent: greet
   examples: |
@@ -16,7 +15,8 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
-
+    - Hi
+    - Hey
 - intent: goodbye
   examples: |
     - good afternoon
@@ -30,7 +30,6 @@ nlu:
     - see you around
     - bye bye
     - see you later
-
 - intent: affirm
   examples: |
     - yes
@@ -39,7 +38,6 @@ nlu:
     - of course
     - that sounds good
     - correct
-
 - intent: deny
   examples: |
     - no
@@ -49,7 +47,6 @@ nlu:
     - don't like that
     - no way
     - not really
-
 - intent: mood_great
   examples: |
     - perfect
@@ -66,7 +63,7 @@ nlu:
     - so so perfect
     - so good
     - so perfect
-
+    - i am happy
 - intent: mood_unhappy
   examples: |
     - my day was horrible
@@ -83,10 +80,83 @@ nlu:
     - extremly sad
     - so saad
     - so sad
-
+    - i am unhappy
+    - i am sad
 - intent: bot_challenge
   examples: |
     - are you a bot?
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+- intent: give_time
+  examples: |
+    - can you tell me what time it is
+    - tell me the time
+    - got the time
+    - what time is it
+    - show me the time
+    - give time
+    - get time
+    - show time
+- intent: show_all_tickets
+  examples: |
+    - show all tickets
+    - SHOW ALL TICKETS
+    - show me all the tickets
+    - show tickets
+    - tickets
+    - all
+    - all tickets
+    - show all
+    - view all
+    - view all tickets
+    - show all ticket
+    - view all t ickets
+    - view tickets
+- intent: create_ticket
+  examples: |
+    - create ticket
+    - can you please open a ticket
+    - I have an issue I need to open a incident for
+    - I'm having a problem
+- intent: update_ticket
+  examples: |
+    - update ticket
+    - i need to update a ticket
+    - update another ticket
+    - update ticket 17
+    - update ticket 11
+- intent: inform_view_id
+  examples: |
+    - view ticket [5](id)
+    - i want to see ticket [6](id)
+    - read ticket [12](id)
+    - read ticket [13](id)
+    - view ticet [13](id)
+    - view ticket [12](id)
+    - view [12](id)
+    - view [9](id)
+    - view ticket [9](id)
+    - view [11](id)
+    - view id
+    - view id [6](id)
+    - view [10](id)
+    - read ticket [9](ids)
+    - view ticket [10](ids)
+    - view [26](id)
+    - rread [20](id)
+    - read [26](id)
+    - view [13](id)
+- intent: inform_delete_ids
+  examples: |
+    - delete ticket
+    - delete tickets [12](ids) [13](ids) [11](ids)
+    - delete ids [1](ids)  [15](ids)
+    - delete[ 1](ids) [4](ids)
+    - delete ticket [12](ids)
+    - delete ticket [5](ids)
+    - delete [12](ids)
+    - delete [12](ids) [3](ids)
+    - delete ids
+    - delte [26](ids)
+    - delete [27](ids)

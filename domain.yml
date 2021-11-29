@@ -1,34 +1,206 @@
-version: "2.0"
-
-intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
-
-responses:
-  utter_greet:
-  - text: "Hey! How are you?"
-
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
-  utter_goodbye:
-  - text: "Bye"
-
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
-
+version: '2.0'
+config:
+  store_entities_as_slots: true
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+intents:
+- greet:
+    use_entities: true
+- goodbye:
+    use_entities: true
+- affirm:
+    use_entities: true
+- deny:
+    use_entities: true
+- mood_great:
+    use_entities: true
+- mood_unhappy:
+    use_entities: true
+- bot_challenge:
+    use_entities: true
+- give_time:
+    use_entities: true
+- show_all_tickets:
+    use_entities: true
+- create_ticket:
+    use_entities: true
+- update_ticket:
+    use_entities: true
+- inform_delete_ids:
+    use_entities: true
+- inform_view_id:
+    use_entities: true
+entities:
+- id
+- ids
+slots:
+  description:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  email:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  priority:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  3_priority_up:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  status:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  2_status_up:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  subject:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  1_ticket_id:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  id:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  ids:
+    type: rasa.shared.core.slots.ListSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  requested_slot:
+    type: rasa.shared.core.slots.UnfeaturizedSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+responses:
+  utter_greet:
+  - buttons:
+    - payload: /show_all_tickets
+      title: ' All Tickets'
+    - payload: /create_ticket
+      title: Cid
+    - payload: /inform_view_id
+      title: Rid
+    - payload: /update_ticket
+      title: Uid
+    - payload: /inform_delete_ids
+      title: Did
+    text: Hey! I am GAIA! I will be your Technician Assistant. I can help you with Creating, Reading, Updating and Deleting Tickets with ITSM Solution Freshdesk (Help Desk) plus many other cool things like time and mood chatting. You can either type or use the buttons for the core CRUD operations.
+  utter_cheer_up:
+  - image: https://i.imgur.com/nGF1K8f.jpg
+    text: 'Here is something to cheer you up:'
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_ask_description:
+  - text: 'Please provide description to your ticket (ff: example description )'
+  utter_ask_email:
+  - text: Email address of the requester. If no contact exists with this email address in Freshdesk, it will be added as a new contact.
+  utter_ask_priority:
+  - buttons:
+    - payload: '1'
+      title: Low
+    - payload: '3'
+      title: High
+    - payload: '4'
+      title: Urgent
+    text: Priority of the ticket.
+  utter_ask_3_priority_up:
+  - buttons:
+    - payload: '1'
+      title: 'Low '
+    - payload: '3'
+      title: High
+    - payload: '4'
+      title: Urgent
+    text: Please update the priority of the  ticket to one of the provided choices.
+  utter_ask_2_status_up:
+  - buttons:
+    - payload: '2'
+      title: Open
+    - payload: '3'
+      title: Pending
+    - payload: '5'
+      title: Closed
+    text: Please provide the new updated status.
+  utter_ask_subject:
+  - text: 'What is the subject of the ticket?  ( ff: ticket subject example)'
+  utter_ask_1_ticket_id:
+  - text: Please enter/reenter the ticket id.
+  utter_ticket_created:
+  - text: Ticket created!
+  utter_ask_status:
+  - buttons:
+    - payload: '2'
+      title: Open
+    - payload: '3'
+      title: Pending
+    - payload: '5'
+      title: Closed
+    text: Status of the ticket.
+  utter_ticket_updated:
+  - text: Ticket {1_ticket_id} has been updated!
+  utter_ask_id:
+  - text: 'ex1: read  9 , ex2: view 12 to read/view a ticket id'
+  utter_inform_view_id:
+  - text: Here are the details of Ticket {id} !
+  utter_inform_delete_ids:
+  - text: You have opted to delete {ids}
+  utter_ask_ids:
+  - text: 'example: delete  1 2 12 (to delete ids 1 , 2, 12)'
+actions:
+- action_show_time
+- action_view_tickets
+- action_ticket_created
+- action_ticket_updated
+- action_inform_delete_ids
+- action_inform_view_id
+forms:
+  create_ticket_form:
+    ignored_intents:
+    - view_id
+    required_slots:
+      description:
+      - type: from_text
+      email:
+      - type: from_text
+      priority:
+      - type: from_text
+      status:
+      - type: from_text
+      subject:
+      - type: from_text
+  update_ticket_form:
+    ignored_intent:
+    - view_id
+    required_slots:
+      1_ticket_id:
+      - type: from_text
+      2_status_up:
+      - type: from_text
+      3_priority_up:
+      - type: from_text
+e2e_actions: []

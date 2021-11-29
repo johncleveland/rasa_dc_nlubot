@@ -1,14 +1,179 @@
 version: "2.0"
-
 stories:
-
-- story: happy path
+- story: path about all tickets
   steps:
   - intent: greet
   - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
-
+  - intent: show_all_tickets
+  - action: action_view_tickets
+- story: Story from Conversation ID 2f2626725810404a9b1ea714288940b5
+  steps:
+  - intent: show_all_tickets
+  - action: action_view_tickets
+- story: path about time
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: give_time
+  - action: action_show_time
+- story: set 3_priority_up slot  to none
+  steps:
+  - action: utter_ask_priority_up
+  - slot_was_set:
+    - 3_priority_up: 4
+- story: set priority_up slot 2 (Low)
+  steps:
+  - action: utter_ask_priority_up
+  - slot_was_set:
+    - 3_priority_up: 2
+- story: Story from Conversation ID 0d178011a4fc494f8ffa01f16abcc526
+  steps:
+  - intent: update_ticket
+  - action: update_ticket_form
+  - active_loop: update_ticket_form
+  - slot_was_set:
+    - requested_slot: 3_priority_up
+  - intent: update_ticket
+  - action: update_ticket_form
+  - slot_was_set:
+    - 3_priority_up: '3'
+  - slot_was_set:
+    - requested_slot: 2_status_up
+  - intent: update_ticket
+  - action: update_ticket_form
+  - slot_was_set:
+    - 2_status_up: '2'
+  - slot_was_set:
+    - requested_slot: 1_ticket_id
+  - intent: update_ticket
+  - action: update_ticket_form
+  - slot_was_set:
+    - 1_ticket_id: '17'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_ticket_updated
+- story: Story from Conversation ID 56d4e93953b4426e96621dfd24f98ebc
+  steps:
+  - intent: create_ticket
+  - action: create_ticket_form
+  - active_loop: create_ticket_form
+  - slot_was_set:
+    - requested_slot: description
+  - slot_was_set:
+    - description: d07
+  - slot_was_set:
+    - requested_slot: email
+  - slot_was_set:
+    - email: me@hadoop.com
+  - slot_was_set:
+    - requested_slot: priority
+  - slot_was_set:
+    - priority: '3'
+  - slot_was_set:
+    - requested_slot: status
+  - slot_was_set:
+    - status: '3'
+  - slot_was_set:
+    - requested_slot: subject
+  - slot_was_set:
+    - subject: s07
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_ticket_created
+  - intent: update_ticket
+  - action: update_ticket_form
+  - active_loop: update_ticket_form
+  - slot_was_set:
+    - requested_slot: 3_priority_up
+  - slot_was_set:
+    - 3_priority_up: '4'
+  - slot_was_set:
+    - requested_slot: 2_status_up
+  - slot_was_set:
+    - 2_status_up: '5'
+  - slot_was_set:
+    - requested_slot: 1_ticket_id
+  - slot_was_set:
+    - 1_ticket_id: '25'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_ticket_updated
+  - intent: show_all_tickets
+  - action: action_view_tickets
+- story: Story from Conversation ID 42d704a9411b4c248e76e242239f2a62
+  steps:
+  - intent: update_ticket
+  - action: update_ticket_form
+  - active_loop: update_ticket_form
+  - slot_was_set:
+    - requested_slot: 3_priority_up
+  - slot_was_set:
+    - 3_priority_up: '3'
+  - slot_was_set:
+    - requested_slot: 2_status_up
+  - slot_was_set:
+    - 2_status_up: '2'
+  - slot_was_set:
+    - requested_slot: 1_ticket_id
+  - slot_was_set:
+    - 1_ticket_id: '17'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_ticket_updated
+- story: path to delete id
+  steps:
+  - intent: inform_delete_ids
+  - action: action_inform_delete_ids
+- story: path to view id
+  steps:
+  - intent: inform_view_id
+  - action: action_inform_view_id
+- story: Story from Conversation ID 8778ef2691db47238f644c6b046d2924
+  steps:
+  - intent: show_all_tickets
+  - action: action_view_tickets
+  - intent: inform_delete_ids
+    entities:
+    - ids: '25'
+    - ids: '23'
+  - slot_was_set:
+    - ids:
+      - '25'
+      - '23'
+  - action: action_inform_delete_ids
+  - slot_was_set:
+    - ids: null
+  - intent: show_all_tickets
+  - action: action_view_tickets
+- story: Story from Conversation ID 75f284c4efa94ca380524435cd26720d
+  steps:
+  - intent: show_all_tickets
+  - action: action_view_tickets
+  - intent: inform_delete_ids
+    entities:
+    - ids: '22'
+    - ids: '21'
+  - slot_was_set:
+    - ids:
+      - '22'
+      - '21'
+  - action: action_inform_delete_ids
+  - slot_was_set:
+    - ids: null
+- story: action inform view 9
+  steps:
+  - action: action_inform_view_id
+  - slot_was_set:
+    - id: 9
+- story: action inform view 12
+  steps:
+  - action: action_inform_view_id
+  - slot_was_set:
+    - id: 12
 - story: sad path 1
   steps:
   - intent: greet
@@ -18,11 +183,12 @@ stories:
   - action: utter_did_that_help
   - intent: affirm
   - action: utter_happy
-
+- story: happy path
+  steps:
+  - intent: mood_great
+  - action: utter_happy
 - story: sad path 2
   steps:
-  - intent: greet
-  - action: utter_greet
   - intent: mood_unhappy
   - action: utter_cheer_up
   - action: utter_did_that_help

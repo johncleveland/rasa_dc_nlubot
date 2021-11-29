@@ -1,0 +1,38 @@
+version: "2.0"
+rules:
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+- rule: Submit create ticket form
+  condition:
+  - active_loop: create_ticket_form
+  steps:
+  - action: create_ticket_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_ticket_created
+- rule: Activate create ticket form
+  steps:
+  - intent: create_ticket
+  - action: create_ticket_form
+  - active_loop: create_ticket_form
+- rule: Activate update ticket form
+  steps:
+  - intent: update_ticket
+  - action: update_ticket_form
+  - active_loop: update_ticket_form
+- rule: Submit update ticket form
+  condition:
+  - active_loop: update_ticket_form
+  steps:
+  - action: update_ticket_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_ticket_updated
