@@ -160,3 +160,6 @@ nlu:
     - delete ids
     - delte [26](ids)
     - delete [27](ids)
+- intent: ask_weather
+  examples: |
+    - What is the temperature today?
