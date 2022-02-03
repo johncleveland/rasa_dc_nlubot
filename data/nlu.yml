@@ -160,3 +160,6 @@ nlu:
     - delete ids
     - delte [26](ids)
     - delete [27](ids)
+- intent: ask_restaurant
+  examples: |
+    - what is the best French restaurant?
