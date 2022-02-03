@@ -160,3 +160,6 @@ nlu:
     - delete ids
     - delte [26](ids)
     - delete [27](ids)
+- intent: order
+  examples: |
+    - I want to order a cheese [pizza](pizza).
