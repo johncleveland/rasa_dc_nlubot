@@ -119,6 +119,9 @@ nlu:
     - can you please open a ticket
     - I have an issue I need to open a incident for
     - I'm having a problem
+    - Create a new incident ticket
+    - New ticket
+    - New incident report
 - intent: update_ticket
   examples: |
     - update ticket
@@ -126,6 +129,7 @@ nlu:
     - update another ticket
     - update ticket 17
     - update ticket 11
+    - Update ticket [321](id)
 - intent: inform_view_id
   examples: |
     - view ticket [5](id)
