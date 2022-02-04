@@ -160,3 +160,7 @@ nlu:
     - delete ids
     - delte [26](ids)
     - delete [27](ids)
+- intent: retrieveWeather
+  examples: |
+    - What is the weather like in [France](location)
+    - Weather in [France](location)
